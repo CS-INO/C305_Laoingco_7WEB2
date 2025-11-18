@@ -45,8 +45,8 @@
         </h2>
 
         <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-            A passionate **IT Student**, aspiring **Full-Stack Developer**,  
-            and someone who loves **building digital experiences**.
+            A passionate CS Student, aspiring to be Full-Stack Developer,  
+            and someone who loves to build an Experiences.
         </p>
 
         <div class="mt-6">
@@ -62,11 +62,10 @@
         <h3 class="text-4xl font-bold mb-6 text-blue-400">About Me</h3>
         <div class="bg-white/5 p-8 rounded-xl backdrop-blur-sm shadow-lg border border-white/10">
             <p class="text-gray-300 text-lg leading-relaxed">
-                Hello! I am <b>John Loyd Laoingco</b>, a dedicated IT student who enjoys exploring
+                Hello! I am <b>John Loyd Laoingco</b>, a dedicated CS student who enjoys exploring
                 the world of programming, creating web applications, learning new technologies, and improving my skills.
                 <br><br>
-                I aim to become a skilled full-stack developer and create meaningful projects that make life easier.
-                I love experimenting with **Laravel**, **Tailwind**, **JavaScript**, and more.
+                SKRRRTT KUBIDOWM
             </p>
         </div>
     </section>
