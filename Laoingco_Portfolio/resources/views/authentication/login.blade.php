@@ -1,8 +1,8 @@
 @include('components.header')
-<form>
-<input type="login" name="login" id="login">
-<input type="password" name="password" id="password">
-<button>Login</button>
-</form>
+{!! Form::open(['route'=>'login', 'method'=>'get']) !!}
+<p>Email</p>
+{!! Form::text('email') !!}
+<p>Password</p>
+{!! Form::text('password') !!}
 
 @include('components.footer')
