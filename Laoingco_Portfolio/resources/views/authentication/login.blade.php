@@ -1,8 +1,18 @@
 @include('components.header')
-{!! Form::open(['route'=>'login', 'method'=>'get']) !!}
-<p>Email</p>
-{!! Form::text('email') !!}
-<p>Password</p>
-{!! Form::text('password') !!}
-
+@if ($errors->any())
+<div style="color: red">
+    @foreach ($eerors->all() as $error)
+        <p>{{$error }}</p>
+    @endforeach
+</div>
+@endif
+<form action="{{route('login')}}" method="POST">
+    @csrf
+    <p>Email</p>
+    <input type="email"name="email" required>
+    <p>Password</p>
+    <input type="password"name="password" required>
+    <input type="submit">
+</form>
 @include('components.footer')
+
