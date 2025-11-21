@@ -1,7 +1,7 @@
 @include('components.header')
 @if ($errors->any())
 <div style="color: red">
-    @foreach ($eerors->all() as $error)
+    @foreach ($errors->all() as $error)
         <p>{{$error }}</p>
     @endforeach
 </div>
