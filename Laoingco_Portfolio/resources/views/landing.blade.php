@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }} – Portfolio</title>
 
-    <!-- Tailwind CSS CDN -->
+    {{-- Tailwind CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <style>
-        /* Custom scroll behavior */
         html {
             scroll-behavior: smooth;
         }
@@ -22,112 +18,124 @@
 <body class="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-gray-100">
 
     {{-- NAVBAR --}}
-    <nav class="flex justify-between items-center px-8 py-6 bg-black/20 backdrop-blur-sm fixed w-full z-20">
-        <h1 class="text-2xl font-bold tracking-wide">John Loyd Laoingco</h1>
+    <nav class="flex justify-between items-center px-8 py-4 bg-black/40 backdrop-blur-sm fixed w-full z-20">
+        <h1 class="text-xl md:text-2xl font-bold tracking-wide">John Loyd Laoingco</h1>
 
-        <ul class="hidden md:flex gap-8 text-lg">
+        <ul class="hidden md:flex gap-6 text-sm md:text-base">
             <li><a href="#about" class="hover:text-blue-400 transition">About</a></li>
             <li><a href="#projects" class="hover:text-blue-400 transition">Projects</a></li>
             <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
         </ul>
     </nav>
 
-    {{-- HERO SECTION --}}
-    <section class="px-8 py-36 text-center" data-aos="fade-up">
-        <h2 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
-            Hello, I'm  
-        </h2>
+    <main class="pt-28">
 
-        <h2 class="text-5xl md:text-7xl font-extrabold mb-6">
-            <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                John Loyd Laoingco
-            </span>
-        </h2>
+        {{-- HERO --}}
+        <section class="px-8 py-16 text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                Hello, I'm
+            </h2>
 
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-            A passionate CS Student, aspiring to be Full-Stack Developer,  
-            and someone who loves to build an Experiences.
-        </p>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+                <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    John Loyd Laoingco
+                </span>
+            </h2>
 
-        <div class="mt-6">
+            <p class="text-lg text-gray-300 mb-8">
+                A CS student and aspiring full-stack developer who loves building web experiences and learning new things.
+            </p>
+
             <a href="#projects"
-               class="px-10 py-4 bg-blue-600 rounded-full text-lg font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-600/30">
+               class="inline-block px-8 py-3 bg-blue-600 rounded-full text-base font-semibold hover:bg-blue-700 transition">
                 View My Projects
             </a>
-        </div>
-    </section>
+        </section>
 
-    {{-- ABOUT --}}
-    <section id="about" class="px-8 py-24 max-w-4xl mx-auto" data-aos="fade-right">
-        <h3 class="text-4xl font-bold mb-6 text-blue-400">About Me</h3>
-        <div class="bg-white/5 p-8 rounded-xl backdrop-blur-sm shadow-lg border border-white/10">
-            <p class="text-gray-300 text-lg leading-relaxed">
-                Hello! I am <b>John Loyd Laoingco</b>, a dedicated CS student who enjoys exploring
-                the world of programming, creating web applications, learning new technologies, and improving my skills.
-                <br><br>
-                SKRRRTT KUBIDOWM
+        {{-- ABOUT --}}
+        <section id="about" class="px-8 py-12 max-w-3xl mx-auto">
+            <h3 class="text-3xl font-bold mb-4 text-blue-400">About Me</h3>
+
+            <div class="bg-white/5 p-6 rounded-xl shadow border border-white/10">
+                <p class="text-gray-300 leading-relaxed">
+                    Hello! I am <b>John Loyd Laoingco</b>, a computer science student who enjoys exploring
+                    programming, creating web applications, and continuously improving my skills.
+                </p>
+            </div>
+        </section>
+
+        {{-- PROJECTS (from CMS) --}}
+        <section id="projects" class="px-8 py-12 bg-gray-900/60">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold mb-6 text-center text-blue-400">My Projects</h3>
+
+                @if($projects->isEmpty())
+                    <p class="text-center text-gray-400">
+                        No projects yet. Log in to the admin panel to add your first project.
+                    </p>
+                @else
+                    <div class="grid md:grid-cols-3 gap-6">
+                        @foreach($projects as $project)
+                            <div class="bg-white/5 p-5 rounded-xl shadow border border-white/10 flex flex-col">
+                                {{-- Thumbnail (optional) --}}
+                                @if($project->thumbnail)
+                                    <img
+                                        src="{{ asset('storage/' . $project->thumbnail) }}"
+                                        alt="{{ $project->title }}"
+                                        class="rounded-lg mb-4 object-cover h-40 w-full"
+                                    >
+                                @endif
+
+                                <h4 class="text-xl font-semibold mb-2">
+                                    {{ $project->title }}
+                                </h4>
+
+                                @if($project->short_description)
+                                    <p class="text-gray-300 text-sm mb-4">
+                                        {{ $project->short_description }}
+                                    </p>
+                                @endif
+
+                                <div class="mt-auto flex flex-wrap gap-2">
+                                    @if($project->github_url)
+                                        <a href="{{ $project->github_url }}" target="_blank"
+                                           class="text-xs px-3 py-1 border border-gray-500 rounded-full hover:bg-gray-800">
+                                            GitHub
+                                        </a>
+                                    @endif
+
+                                    @if($project->live_url)
+                                        <a href="{{ $project->live_url }}" target="_blank"
+                                           class="text-xs px-3 py-1 bg-blue-600 rounded-full hover:bg-blue-700">
+                                            Live Demo
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </section>
+
+        {{-- CONTACT --}}
+        <section id="contact" class="px-8 py-12 max-w-3xl mx-auto text-center">
+            <h3 class="text-3xl font-bold mb-4 text-blue-400">Contact Me</h3>
+            <p class="text-gray-300 mb-6">
+                Have a question or want to collaborate? Feel free to reach out.
             </p>
-        </div>
-    </section>
 
-    {{-- PROJECTS --}}
-    <section id="projects" class="px-8 py-24 bg-gray-800/40 backdrop-blur-sm" data-aos="fade-up">
-        <h3 class="text-4xl font-bold mb-10 text-center text-blue-400">My Projects</h3>
-
-        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
-            {{-- PROJECT CARD --}}
-            <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-blue-500/20 transition border border-white/10"
-                data-aos="zoom-in">
-                <h4 class="text-2xl font-semibold mb-3">Project One</h4>
-                <p class="text-gray-300 mb-4">A web application created to solve a real-world problem.</p>
-                <a href="#" class="text-blue-400 hover:underline">View More →</a>
-            </div>
-
-            <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-purple-500/20 transition border border-white/10"
-                data-aos="zoom-in" data-aos-delay="200">
-                <h4 class="text-2xl font-semibold mb-3">Project Two</h4>
-                <p class="text-gray-300 mb-4">Something cool I built using Laravel and Tailwind CSS.</p>
-                <a href="#" class="text-blue-400 hover:underline">View More →</a>
-            </div>
-
-            <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-pink-500/20 transition border border-white/10"
-                data-aos="zoom-in" data-aos-delay="400">
-                <h4 class="text-2xl font-semibold mb-3">Project Three</h4>
-                <p class="text-gray-300 mb-4">A fun project showcasing my creativity and skills.</p>
-                <a href="#" class="text-blue-400 hover:underline">View More →</a>
-            </div>
-
-        </div>
-    </section>
-
-    {{-- CONTACT --}}
-    <section id="contact" class="px-8 py-24 max-w-3xl mx-auto text-center" data-aos="fade-left">
-        <h3 class="text-4xl font-bold mb-6 text-blue-400">Contact Me</h3>
-        <p class="text-gray-300 text-lg mb-8">
-            Have a question? Want to collaborate?  
-            Feel free to reach out!
-        </p>
-
-        <a href="mailto:you@example.com"
-           class="px-10 py-4 bg-purple-600 rounded-full text-lg font-semibold hover:bg-purple-700 transition shadow-lg shadow-purple-600/30">
-            Send Email
-        </a>
-    </section>
+            <a href="mailto:you@example.com"
+               class="inline-block px-8 py-3 bg-purple-600 rounded-full text-base font-semibold hover:bg-purple-700 transition">
+                Send Email
+            </a>
+        </section>
+    </main>
 
     {{-- FOOTER --}}
-    <footer class="py-10 text-center text-gray-400 border-t border-gray-700">
+    <footer class="py-6 text-center text-gray-400 border-t border-gray-800 text-sm">
         © {{ date('Y') }} John Loyd Laoingco — All Rights Reserved.
     </footer>
-
-    <!-- AOS Animation Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-        });
-    </script>
 
 </body>
 </html>

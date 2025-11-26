@@ -1,55 +1,32 @@
-@extends('layout.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased">
 
-@section('content')
-<div class="max-w-6xl mx-auto px-6">
+@include('components.header')
 
-    {{-- Title + CTA --}}
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
-        <div>
-            <h1 class="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p class="text-sm text-slate-400 mt-1">
-                Manage the projects that show on your portfolio landing page.
-            </p>
-        </div>
+<main class="max-w-6xl mx-auto pt-24 pb-16 px-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold tracking-tight">Projects</h1>
 
         <a href="{{ route('admin.projects.create') }}"
-           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 rounded-md text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/30">
+           class="px-4 py-2 bg-blue-600 rounded-md text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/30">
             + New Project
         </a>
     </div>
 
-    {{-- Flash message --}}
     @if(session('success'))
         <div class="mb-4 px-4 py-2 bg-emerald-600/15 border border-emerald-500/70 text-sm text-emerald-200 rounded">
             {{ session('success') }}
         </div>
     @endif
 
-    {{-- Stats row --}}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="rounded-xl bg-slate-900/60 border border-slate-800 p-4">
-            <p class="text-xs text-slate-400 mb-1">Total Projects</p>
-            <p class="text-2xl font-semibold">{{ \App\Models\Project::count() }}</p>
-        </div>
-        <div class="rounded-xl bg-slate-900/60 border border-slate-800 p-4">
-            <p class="text-xs text-slate-400 mb-1">Published</p>
-            <p class="text-2xl font-semibold">
-                {{ \App\Models\Project::where('is_published', true)->count() }}
-            </p>
-        </div>
-        <div class="rounded-xl bg-slate-900/60 border border-slate-800 p-4">
-            <p class="text-xs text-slate-400 mb-1">Drafts</p>
-            <p class="text-2xl font-semibold">
-                {{ \App\Models\Project::where('is_published', false)->count() }}
-            </p>
-        </div>
-    </div>
-
-    {{-- Projects table --}}
     @if($projects->isEmpty())
-        <p class="text-slate-400 text-sm">
-            No projects yet. Click <span class="font-semibold">“New Project”</span> to add your first one.
-        </p>
+        <p class="text-slate-400 text-sm">No projects yet. Click “New Project” to add one.</p>
     @else
         <div class="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
             <table class="min-w-full text-sm">
@@ -109,6 +86,9 @@
             {{ $projects->links() }}
         </div>
     @endif
+</main>
 
-</div>
-@endsection
+@include('components.footer')
+
+</body>
+</html>
