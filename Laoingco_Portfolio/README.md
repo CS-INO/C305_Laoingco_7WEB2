@@ -7,6 +7,133 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Portfolio Website (LARAVEL)
+
+📌 Portfolio Website (Laravel)
+
+This project is a personal portfolio website built using Laravel, Blade, Tailwind CSS, and MySQL.
+It includes a public landing page and an admin dashboard where I can manage my projects and profile information.
+
+✨ Features
+
+Public portfolio landing page
+
+Admin dashboard (login required)
+
+Create, edit, delete projects
+
+Upload project thumbnails
+
+Publish / unpublish projects
+
+Upload a profile picture
+
+Update name, headline, email, and social links
+
+Light/Dark mode toggle on landing page
+
+Flip-card animation for projects
+
+Responsive UI
+
+🛠️ Requirements
+
+PHP 8.1+
+
+Composer
+
+MySQL
+
+Laravel 10+
+
+▶️ How to Run
+
+Clone the project:
+
+git clone <repo-link>
+cd <Laoingco_Portfolio>
+
+
+Install dependencies:
+
+composer install
+
+
+Copy environment file:
+
+cp .env.example .env
+
+
+Generate app key:
+
+php artisan key:generate
+
+
+Set database credentials in .env.
+
+Run migrations:
+
+php artisan migrate
+
+
+Enable image uploads:
+
+php artisan storage:link
+
+
+Start the server:
+
+php artisan serve
+
+
+Visit: http://127.0.0.1:8000
+
+🔐 Admin Panel
+
+After registering or logging in, go to:
+
+/admin
+
+
+From the admin panel you can:
+
+Manage projects
+
+Update site settings
+
+Upload profile picture
+
+📁 Project Structure (simplified)
+app/Http/Controllers/Admin/
+resources/views/admin/
+resources/views/landing.blade.php
+routes/web.php
+public/storage/
+
+🧪 Notes
+
+Published projects appear on the landing page.
+
+All images are stored in storage/app/public.
+
+The settings page controls your landing page hero section.
+
+🎓 For School Submission
+
+This project was created as part of my coursework to demonstrate:
+
+Laravel CRUD operations
+
+File uploading
+
+Blade templating
+
+Responsive front-end design
+
+Basic authentication
+
+Database migrations
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

@@ -15,27 +15,7 @@
             </a>
 
             {{-- Desktop nav --}}
-            <div class="hidden md:flex items-center gap-6 text-sm">
-                <a href="{{ url('/') }}" class="hover:text-blue-400 transition">Home</a>
-                <a href="{{ url('/#projects') }}" class="hover:text-blue-400 transition">Projects</a>
-                <a href="{{ url('/#contact') }}" class="hover:text-blue-400 transition">Contact</a>
-
-                @auth
-                    <a href="{{ route('dashboard') }}"
-                       class="px-3 py-1.5 rounded-full border border-slate-700 hover:border-blue-500 hover:text-blue-300 text-xs font-medium">
-                        Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login.form') }}"
-                       class="text-xs text-slate-300 hover:text-blue-400">
-                        Login
-                    </a>
-                    <a href="{{ route('register.form') }}"
-                       class="px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-xs font-medium shadow shadow-blue-600/30">
-                        Sign up
-                    </a>
-                @endauth
-            </div>
+            
         </div>
     </div>
 </nav>
