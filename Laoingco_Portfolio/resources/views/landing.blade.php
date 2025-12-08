@@ -6,7 +6,6 @@
   <title>{{ config('app.name', 'Portfolio') }} – {{ $settings['name'] ?? 'John Loyd Laoingco' }}</title>
   <link rel="canonical" href="{{ url('/') }}"/>
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -35,9 +34,13 @@
     .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
     .reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.revealed { opacity: 1; transform: translateY(0); }
+    /* moving diagonal stripes on the progress bar */
+    @keyframes barberpole {
+      from { background-position: 0 0; }
+      to   { background-position: 24px 0; }
+    }
   </style>
 
-  {{-- Dynamic OG using Settings profile image (fallback-safe) --}}
   @php
     $profile  = $settings['profile_image'] ?? null;
     $ogImage  = $profile ? asset('storage/'.$profile) : asset('images/profile.jpg');
@@ -165,7 +168,7 @@
           </div>
 
           <!-- socials -->
-          <div class="mt-5 flex items-center gap-4 text-slate-500 dark:text-slate-400 justify-center md:justify-start">
+          <div class="mt-5 flex items-centered gap-4 text-slate-500 dark:text-slate-400 justify-center md:justify-start">
             @if(!empty($settings['github_url']))
               <a href="{{ $settings['github_url'] }}" target="_blank" class="hover:text-slate-900 dark:hover:text-slate-200" aria-label="GitHub">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -210,13 +213,175 @@
 
     <!-- ABOUT -->
     <section id="about" class="px-6 py-12 max-w-4xl mx-auto reveal">
-      <h2 class="text-2xl font-bold text-blue-700 dark:text-blue-400">About Me</h2>
-      <div class="mt-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
-        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
-          I love exploring programming and building practical web apps. My current toolkit includes
-          <span class="font-semibold">Laravel</span>, <span class="font-semibold">Blade</span>, and
-          <span class="font-semibold">Tailwind CSS</span>. Always learning, always shipping.
-        </p>
+  <h2 class="text-2xl font-bold text-blue-700 dark:text-blue-400">About Me</h2>
+
+  <div class="mt-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6">
+    <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+      Hello! I’m <span class="font-semibold">John Loyd Laoingco</span>, a dedicated Computer Science student who enjoys 
+      transforming ideas into clean, functional, and user-friendly web applications. What started as curiosity has grown 
+      into a passion for building real systems and improving how people interact with technology.
+      <br><br>
+      My main toolkit includes <span class="font-semibold">Laravel</span>, 
+      <span class="font-semibold">Blade</span>, <span class="font-semibold">PHP</span>, 
+      <span class="font-semibold">Tailwind CSS</span>, and <span class="font-semibold">MySQL</span>. 
+      I enjoy working across both the frontend and backend  from designing smooth interfaces to creating reliable server-side logic.
+      <br><br>
+      I am always exploring new concepts, experimenting with frameworks, and enhancing the way I write and structure code. 
+      Every project I build helps me grow as a developer, sharpen my problem-solving skills, and prepare for real-world development challenges.
+      <br><br>
+      Outside of coding, I also enjoy learning about UI/UX, responsive design principles, and modern best practices to deliver better digital experiences. 
+      I believe in continuous learning and always aim to be better than I was yesterday.
+    </p>
+  </div>
+</section>
+
+
+    <section id="skills" class="px-6 py-14 max-w-6xl mx-auto reveal">
+      <h2 class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-8 text-center">
+        Skills & Technologies
+      </h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="h-5 w-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-4 4v-4H5a2 2 0 0 1-2-2V5z"/>
+            </svg>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Frontend</h3>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">HTML5</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="90"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">CSS3 / Tailwind</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="85"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">JavaScript</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="75"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="h-5 w-5 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2H3V6zm0 5h18v2H3v-2zm0 5h18v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2z"/></svg>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Backend</h3>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">PHP</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="80"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">Laravel</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="78"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">Python</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="60"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="h-5 w-5 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 1.79 10 4v12c0 2.21-4.477 4-10 4S2 20.21 2 18V6c0-2.21 4.477-4 10-4zm0 2C7.582 4 4 5.343 4 6.5S7.582 9 12 9s8-1.343 8-2.5S16.418 4 12 4zm8 5.09C18.666 10.165 15.59 11 12 11s-6.666-.835-8-1.91V14.5C4 15.657 7.582 17 12 17s8-1.343 8-2.5V9.09z"/></svg>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Database</h3>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">MySQL</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="70"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-slate-700 dark:text-slate-300">Migrations / Schema</span>
+                <span class="text-slate-500 dark:text-slate-400"><span data-skill-count>0</span>%</span>
+              </div>
+              <div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full w-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 animate-[barberpole_1.2s_linear_infinite] [background-size:24px_24px] [background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25)_0_12px,transparent_12px_24px)]"
+                    data-skill-bar data-percent="68"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="h-5 w-5 text-fuchsia-600 dark:text-fuchsia-400" viewBox="0 0 24 24" fill="currentColor"><path d="M2.293 12.95l6.364-6.364 2.828 2.828-6.364 6.364-2.828-.828zM14.121 1.707l2.121 2.121-3.536 3.536-2.121-2.12 3.536-3.537zM16.95 9.879l2.121 2.121-6.364 6.364-2.828-.828.828-2.828 6.243-4.829z"/></svg>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Tools</h3>
+          </div>
+          <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-sm">
+            <li>VS Code</li>
+            <li>Git & GitHub</li>
+            <li>Composer</li>
+            <li>NPM</li>
+          </ul>
+        </div>
+
+        <!-- Other -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="h-5 w-5 text-indigo-600 dark:text-indigo-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 4.848L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.61-1.152L12 2z"/></svg>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Other Skills</h3>
+          </div>
+          <ul class="space-y-2 text-slate-700 dark:text-slate-300 text-sm">
+            <li>Responsive Web Design</li>
+            <li>UI/UX Basics</li>
+            <li>Debugging</li>
+            <li>Version Control</li>
+          </ul>
+        </div>
+
       </div>
     </section>
 
@@ -332,7 +497,7 @@
     © {{ date('Y') }} {{ $name }} — All Rights Reserved.
   </footer>
 
-  <!-- Tiny scroll-reveal + counters + toTop -->
+  <!-- Tiny scroll-reveal + counters + toTop + skills bars -->
   <script>
     (function () {
       // reveal
@@ -380,6 +545,52 @@
         });
       }, { threshold: 0.6 });
       counters.forEach(c => ci.observe(c));
+    })();
+
+    // Animate skill bars when #skills enters viewport
+    (function () {
+      const skills = document.getElementById('skills');
+      if (!skills) return;
+
+      const bars = skills.querySelectorAll('[data-skill-bar]');
+      const counts = skills.querySelectorAll('[data-skill-count]');
+      let started = false;
+
+      function start() {
+        if (started) return;
+        started = true;
+
+        // fill bars with a slight stagger
+        bars.forEach((bar, idx) => {
+          const pct = parseInt(bar.getAttribute('data-percent') || '0', 10);
+          bar.style.transition = 'width 1.2s ease-out';
+          setTimeout(() => { bar.style.width = pct + '%'; }, 80 * (idx + 1));
+        });
+
+        // count numbers
+        counts.forEach((el, i) => {
+          const target = parseInt(bars[i]?.getAttribute('data-percent') || '0', 10);
+          const dur = 900;
+          const startTs = performance.now();
+          const tick = (now) => {
+            const p = Math.min(1, (now - startTs) / dur);
+            el.textContent = Math.floor(target * p);
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            start();
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      io.observe(skills);
     })();
   </script>
 </body>
